@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <div class="content-section">
+            <div class="section-card">
+                <div class="section-header">
+                    <h3>Recent Orders</h3>
+                    <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+                </div>
+
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#ORD-7841</td>
+                            <td>
+                                <div class="customer-info">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer">
+                                    <span>John Smith</span>
+                                </div>
+                            </td>
+                            <td>May 12, 2023</td>
+                            <td>$245.00</td>
+                            <td><span class="order-status status-completed">Completed</span></td>
+                            <td><i class="fas fa-ellipsis-v"></i></td>
+                        </tr>
+                        <tr>
+                            <td>#ORD-7840</td>
+                            <td>
+                                <div class="customer-info">
+                                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Customer">
+                                    <span>Emily Davis</span>
+                                </div>
+                            </td>
+                            <td>May 11, 2023</td>
+                            <td>$189.50</td>
+                            <td><span class="order-status status-processing">Processing</span></td>
+                            <td><i class="fas fa-ellipsis-v"></i></td>
+                        </tr>
+                        <tr>
+                            <td>#ORD-7839</td>
+                            <td>
+                                <div class="customer-info">
+                                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Customer">
+                                    <span>Michael Brown</span>
+                                </div>
+                            </td>
+                            <td>May 10, 2023</td>
+                            <td>$320.75</td>
+                            <td><span class="order-status status-pending">Pending</span></td>
+                            <td><i class="fas fa-ellipsis-v"></i></td>
+                        </tr>
+                        <tr>
+                            <td>#ORD-7838</td>
+                            <td>
+                                <div class="customer-info">
+                                    <img src="https://randomuser.me/api/portraits/women/42.jpg" alt="Customer">
+                                    <span>Sarah Wilson</span>
+                                </div>
+                            </td>
+                            <td>May 9, 2023</td>
+                            <td>$175.20</td>
+                            <td><span class="order-status status-completed">Completed</span></td>
+                            <td><i class="fas fa-ellipsis-v"></i></td>
+                        </tr>
+                        <tr>
+                            <td>#ORD-7837</td>
+                            <td>
+                                <div class="customer-info">
+                                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Customer">
+                                    <span>David Johnson</span>
+                                </div>
+                            </td>
+                            <td>May 8, 2023</td>
+                            <td>$420.00</td>
+                            <td><span class="order-status status-completed">Completed</span></td>
+                            <td><i class="fas fa-ellipsis-v"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{% endblock content %}
