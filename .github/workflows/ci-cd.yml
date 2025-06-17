@@ -38,16 +38,26 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Sync to EC2
+      - name: Add EC2 host to known_hosts
         run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Sync to EC2
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          APP_DIR: ${{ secrets.APP_DIR }}
+        run: |
+          echo "Syncing to ${SSH_USER}@${SSH_HOST}:${APP_DIR}"
           rsync -avz --exclude '.git*' --exclude 'venv' \
-            ./src/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.APP_DIR }}/
+            ./src/ ${SSH_USER}@${SSH_HOST}:${APP_DIR}/
 
       - name: Remote migrate & restart services
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh ${SSH_USER}@${SSH_HOST} << 'EOF'
             set -e
-            cd ${{ secrets.APP_DIR }}
+            cd ${APP_DIR}
             source ../venv/bin/activate
             pip install -r requirements.txt
             python manage.py migrate --noinput
@@ -55,3 +65,4 @@ jobs:
             sudo systemctl restart gunicorn
             sudo systemctl restart nginx
           EOF
+
