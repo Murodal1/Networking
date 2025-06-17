@@ -62,8 +62,9 @@ jobs:
           ssh ${SSH_USER}@${SSH_HOST} "\
             set -e && \
             cd ${APP_DIR} && \
-            source ../venv/bin/activate && \
-            pip install -r ${APP_DIR}/../requirements.txt && \
+            source venv/bin/activate && \
+            cd src && \
+            pip install -r ${APP_DIR}/requirements.txt && \
             python manage.py migrate --noinput && \
             python manage.py collectstatic --noinput && \
             sudo systemctl restart gunicorn && \
