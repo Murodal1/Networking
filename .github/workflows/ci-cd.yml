@@ -50,8 +50,10 @@ jobs:
           APP_DIR: ${{ secrets.APP_DIR }}
         run: |
           echo "Syncing to ${SSH_USER}@${SSH_HOST}:${APP_DIR}"
-          rsync -avz --exclude '.git*' --exclude 'venv' \
-            ./src/ ${SSH_USER}@${SSH_HOST}:${APP_DIR}/
+          rsync -avz \
+           --exclude '.git*' \
+           --exclude 'venv' \
+           ./ ${SSH_USER}@${SSH_HOST}:${APP_DIR}/
 
       - name: Remote migrate & restart services
         env:
