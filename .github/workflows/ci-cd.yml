@@ -54,15 +54,20 @@ jobs:
             ./src/ ${SSH_USER}@${SSH_HOST}:${APP_DIR}/
 
       - name: Remote migrate & restart services
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          APP_DIR:  ${{ secrets.APP_DIR }}
         run: |
-          ssh ${SSH_USER}@${SSH_HOST} << 'EOF'
-            set -e
-            cd ${APP_DIR}
-            source ../venv/bin/activate
-            pip install -r requirements.txt
-            python manage.py migrate --noinput
-            python manage.py collectstatic --noinput
-            sudo systemctl restart gunicorn
-            sudo systemctl restart nginx
-          EOF
+          ssh ${SSH_USER}@${SSH_HOST} "\
+            set -e && \
+            cd ${APP_DIR} && \
+            source ../venv/bin/activate && \
+            pip install -r requirements.txt && \
+            python manage.py migrate --noinput && \
+            python manage.py collectstatic --noinput && \
+            sudo systemctl restart gunicorn && \
+            sudo systemctl restart nginx \
+          "
+
 
